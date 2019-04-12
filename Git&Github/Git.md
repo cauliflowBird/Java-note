@@ -250,3 +250,39 @@ $ ssh-keygen -t rsa -C "youremail@example.com"
 
 点“Add Key”，你就应该看到已经添加的Key：
 
+#### 5.1 远程同步
+
+实现本地Git仓库与Github上新建一个Git仓库进行远程同步；这样GitHub上的仓库即可以作为备份也可以用来协作。
+
+1.在Github上新建一个Git仓库
+
+![createGitRepository](E:\Java进阶(note)\Git&Github\images\createGitRepository.jpg)
+
+
+
+![createRepository](E:\Java进阶(note)\Git&Github\images\createRepository.jpg)
+
+自定义Repository name(Git仓库名),点击创建
+
+2.根据提示在Git Bash(Git工具命令行中操作),此时所提交的修改要已经commit到本机版本库中,且在当前master
+
+![GitCreate](E:\Java进阶(note)\Git&Github\images\GitCreate.jpg)
+
+```shell
+$ git remote add origin https://github.com/cauliflowBird/test.git
+添加后，远程库的名字就是origin，这是Git默认的叫法，也可以改成别的，但是origin这个名字一看就知道是远程库;
+
+下一步，把本地库的所有内容推送到远程库上：
+$ git push -u origin master
+
+把本地库的内容推送到远程，用`git push`命令，实际上是把当前分支`master`推送到远程。
+
+由于远程库是空的，我们第一次推送`master`分支时，加上了`-u`参数，Git不但会把本地的`master`分支内容推送的远程新的`master`分支，还会把本地的master分支和远程的master分支关联起来，在以后的推送或者拉取时就可以简化命令。
+
+现在起，只要本地作了提交，就可以通过命令：
+$ git push origin master
+把本地master分支的最新修改推送至GitHub，现在就拥有了真正的分布式版本库。
+```
+
+
+
