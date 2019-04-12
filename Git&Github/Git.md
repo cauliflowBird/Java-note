@@ -4,7 +4,7 @@
 
 #### 1.1  版本控制
 
-![版本控制](E:\Java进阶(note)\Git&Github\images\版本控制.jpg)
+![版本控制](https://github.com/cauliflowBird/Java-note-/blob/master/images/版本控制.jpg)
 
 如上图: 同一个人或多人对同一个文件进行修改从而诞生多个版本(即副本),版本控制软件就可以很好的记录修改内容,修改人等信息；方便编辑的人查看改动和检索自己所需要的内容，也有利于多人协作来完成一个项目。
 
