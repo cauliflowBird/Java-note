@@ -12,7 +12,9 @@
 
 ##### 	集中式(如CVS、SVN):
 
-![集中式](E:\Java进阶(note)\Git&Github\images\集中式.jpg)
+![集中式](images\集中式.jpg)
+
+
 
 版本库集中存放在中央服务器；个人用户使用自己电脑，工作时先从中央处理器取得最新版本，然后工作完后又将自己更新得版本上传至中央服务器(类似于多个人编辑图书馆中得一本书);
 
@@ -20,7 +22,7 @@
 
 ##### 	分布式(Git):
 
-![分布式](E:\Java进阶(note)\Git&Github\images\分布式.jpg)
+![分布式](images\分布式.jpg)
 
 没用中央服务器，每个人的电脑上都有一个完整的版本库，工作时不需要联网，即使A,B两人在各自电脑上修改了同一文件，只需将各自的修改推送给对方即可,就可看到互相的修改(不在同一个局域网内，可能会需要类似的中央服务器，只是为了方便“交换”大家的修改，没有也没关系);
 
@@ -171,7 +173,7 @@ git reflog --查看命令历史,以便查看相应版本对应的commit_id，以
 >
 > Git的版本库里存了很多东西，其中最重要的就是称为stage（或者叫index）的暂存区，还有Git为我们自动创建的第一个分支`master`，以及指向`master`的一个指针叫`HEAD`;
 
-![工作区和暂存区](E:\Java进阶(note)\Git&Github\images\工作区和暂存区.jpg)
+![工作区和暂存区](images\工作区和暂存区.jpg)
 
 把文件添加到Git版本库:
 
@@ -256,17 +258,17 @@ $ ssh-keygen -t rsa -C "youremail@example.com"
 
 1.在Github上新建一个Git仓库
 
-![createGitRepository](E:\Java进阶(note)\Git&Github\images\createGitRepository.jpg)
+![createGitRepository](images\createGitRepository.jpg)
 
 
 
-![createRepository](E:\Java进阶(note)\Git&Github\images\createRepository.jpg)
+![createRepository](images\createRepository.jpg)
 
 自定义Repository name(Git仓库名),点击创建
 
 2.根据提示在Git Bash(Git工具命令行中操作),此时所提交的修改要已经commit到本机版本库中,且在当前master
 
-![GitCreate](E:\Java进阶(note)\Git&Github\images\GitCreate.jpg)
+![GitCreate](images\GitCreate.jpg)
 
 ```shell
 $ git remote add origin https://github.com/cauliflowBird/test.git
@@ -283,6 +285,4 @@ $ git push -u origin master
 $ git push origin master
 把本地master分支的最新修改推送至GitHub，现在就拥有了真正的分布式版本库。
 ```
-
-
 
