@@ -4,7 +4,7 @@
 
 #### 1.1  版本控制
 
-![版本控制](https://github.com/cauliflowBird/Java-note-/blob/master/images/版本控制.jpg)
+![版本控制](https://github.com/cauliflowBird/Java-note-/blob/master/Git%26Github/images/版本控制.jpg)
 
 如上图: 同一个人或多人对同一个文件进行修改从而诞生多个版本(即副本),版本控制软件就可以很好的记录修改内容,修改人等信息；方便编辑的人查看改动和检索自己所需要的内容，也有利于多人协作来完成一个项目。
 
@@ -22,7 +22,7 @@
 
 ##### 	分布式(Git):
 
-![分布式](images\分布式.jpg)
+![分布式](https://github.com/cauliflowBird/Java-note-/blob/master/Git%26Github/images/分布式.jpg)
 
 没用中央服务器，每个人的电脑上都有一个完整的版本库，工作时不需要联网，即使A,B两人在各自电脑上修改了同一文件，只需将各自的修改推送给对方即可,就可看到互相的修改(不在同一个局域网内，可能会需要类似的中央服务器，只是为了方便“交换”大家的修改，没有也没关系);
 
@@ -173,7 +173,7 @@ git reflog --查看命令历史,以便查看相应版本对应的commit_id，以
 >
 > Git的版本库里存了很多东西，其中最重要的就是称为stage（或者叫index）的暂存区，还有Git为我们自动创建的第一个分支`master`，以及指向`master`的一个指针叫`HEAD`;
 
-![工作区和暂存区](images\工作区和暂存区.jpg)
+![工作区和暂存区](https://github.com/cauliflowBird/Java-note-/blob/master/Git%26Github/images/工作区和暂存区.jpg)
 
 把文件添加到Git版本库:
 
@@ -258,17 +258,17 @@ $ ssh-keygen -t rsa -C "youremail@example.com"
 
 1.在Github上新建一个Git仓库
 
-![createGitRepository](images\createGitRepository.jpg)
+![createGitRepository](https://github.com/cauliflowBird/Java-note-/blob/master/Git%26Github/images/createGitRepository.jpg)
 
 
 
-![createRepository](images\createRepository.jpg)
+![createRepository](https://github.com/cauliflowBird/Java-note-/blob/master/Git%26Github/images/createRepository.jpg)
 
 自定义Repository name(Git仓库名),点击创建
 
 2.根据提示在Git Bash(Git工具命令行中操作),此时所提交的修改要已经commit到本机版本库中,且在当前master
 
-![GitCreate](images\GitCreate.jpg)
+![GitCreate](https://github.com/cauliflowBird/Java-note-/blob/master/Git%26Github/images/GitCreate.jpg)
 
 ```shell
 $ git remote add origin https://github.com/cauliflowBird/test.git
