@@ -12,7 +12,7 @@
 
 ##### 	集中式(如CVS、SVN):
 
-![集中式](images\集中式.jpg)
+![集中式](https://github.com/cauliflowBird/Java-note-/blob/master/Git%26Github/images/集中式.jpg)
 
 
 
