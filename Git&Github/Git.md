@@ -286,3 +286,6 @@ $ git push origin master
 把本地master分支的最新修改推送至GitHub，现在就拥有了真正的分布式版本库。
 ```
 
+注意:当本地master分支与远程Github上master分支关联起来后，若先在Github上master分支手动作了修改，此时要向基于远程(Github分支)同步到本地master后`$ git pull --rebase origin master`
+
+才能推送本地的修改到远程master`$ git push origin master`,否则会报错。
