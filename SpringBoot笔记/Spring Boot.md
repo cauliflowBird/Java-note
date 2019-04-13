@@ -201,7 +201,7 @@ public @interface EnableAutoConfiguration {
 
 ​         会给容器中导入非常多的自动配置类(xxxAutoConfiguration);就是给容器中导入这个场景需要的所有组件,并配置好这些组件;
 
-   ![自动配置类](E:\Java进阶(note)\SpringBoot笔记\images\configuration.jpg)
+   ![自动配置类](images\configuration.jpg)
 
 有了自动配置类,免去了手动编写配置注入功能组件的工作;
 
@@ -224,10 +224,12 @@ IDE都支持使用Spring的项目创建向导快速创建一个Spring Boot项目
 - 主程序已经生成好了,我们只需要我们自己的逻辑
 - resources文件夹中目录结构
   - static:保存所有的静态资源; js css images;
+
   - templates:保存所有的模板页面;(Spring Boot默认jar包使用嵌入式的tomcat,默认不支持jsp页面);可以使用模板引擎(freemarker、thymeleaf);
+
   - application.properties: Spring Boot应用的配置文件;可以修改一些默认设置。
 
-
+    
 
 # 二、配置文件
 
@@ -394,7 +396,7 @@ public class Person {
 
 ### 1、properties配置文件在idea中默认utf-8可能会乱码
 
-![properties文件乱码](E:\Java进阶(note)\SpringBoot笔记\images\properties文件乱码.jpg)
+![properties文件乱码](images\properties文件乱码.jpg)
 
 勾选以上配置解决。
 
@@ -1040,7 +1042,7 @@ public class HelloWorld {
 
 图示：
 
-![concrete-bindings](E:\Java进阶(note)\SpringBoot笔记\images\concrete-bindings.png)
+![concrete-bindings](images\concrete-bindings.png)
 
 每一个日志的实现框架都有自己的配置文件。使用slf4j以后，**配置文件还是做成日志实现框架自己本身的配置文件；**
 
@@ -1050,7 +1052,7 @@ a(slf4j+logback)：Spring(commons-logging)、Hibernate(jboss-logging)、MyBatis�
 
 统一日志记录，即使是别的框架和我一起统一使用slf4j进行输出?
 
-![legacy](E:\Java进阶(note)\SpringBoot笔记\images\legacy.png)
+![legacy](images\legacy.png)
 
 **如何让系统中所有的日志都统一到slf4j：**
 
@@ -1086,7 +1088,7 @@ SpringBoot使用它来做日志功能；
 
 底层依赖关系
 
-![springboot-logging](E:\Java进阶(note)\SpringBoot笔记\images\springboot-logging.jpg)
+![springboot-logging](images\springboot-logging.jpg)
 
 总结：
 
@@ -1393,7 +1395,7 @@ public WelcomePageHandlerMapping welcomePageHandlerMapping(ApplicationContext ap
 
 ​	webjars：以jar包的方式引入静态资源；https://www.webjars.org/
 
-![webjar](E:\Java进阶(note)\SpringBoot笔记\images\webjar.jpg)
+![webjar](images\webjar.jpg)
 
 ​	localhost:8080/webjars/jquery/3.3.1-1/jquery.js
 
@@ -1438,7 +1440,7 @@ spring.resources.static-locations=classpath:/hello,classpath:/res
 
 ​	JSP、Velocity、Freemarker、Thymeleaf；
 
-![template-engine](E:\Java进阶(note)\SpringBoot笔记\images\template-engine.png)
+![template-engine](images\template-engine.png)
 
 
 
@@ -1515,7 +1517,7 @@ public class ThymeleafProperties {
 
 ​	th：任意html属性；来替换原生属性的值
 
-​	![thymeleaf](E:\Java进阶(note)\SpringBoot笔记\images\thymeleaf.png)
+​	![thymeleaf](images\thymeleaf.png)
 
 
 
@@ -1831,7 +1833,7 @@ SpringBoot中使用步骤：
 
 ​	1)、编写国际化配置文件，抽取页面需要显示的国际化消息
 
-![](E:\Java进阶(note)\SpringBoot笔记\images\国际化.jpg)
+![](images\国际化.jpg)
 
 ​	2)、SpringBoot自动配置好了管理国际化资源文件的组件
 
@@ -1875,7 +1877,7 @@ private String basename = "messages";
 
 ​	3)、去页面获取国际化的值；
 
-![properties文件乱码](E:\Java进阶(note)\SpringBoot笔记\images\properties文件乱码.jpg)
+![properties文件乱码](images\properties文件乱码.jpg)
 
 ```html
 <!DOCTYPE html>
@@ -2346,15 +2348,15 @@ spring.mvc.date-format=yyyy-MM-dd
 
 ​		1)、浏览器返回一个默认的错误页面
 
-### ![错误](E:\Java进阶(note)\SpringBoot笔记\images\错误.jpg)
+### ![错误](images\错误.jpg)
 
 浏览器发送请求的请求头：
 
-![浏览器](E:\Java进阶(note)\SpringBoot笔记\images\浏览器.jpg)
+![浏览器](images\浏览器.jpg)
 
-​		2)、如果是其他客户端，默认响应一个json数据![错误(客户端)](E:\Java进阶(note)\SpringBoot笔记\images\错误(客户端).png)
+​		2)、如果是其他客户端，默认响应一个json数据![错误(客户端)](images\错误(客户端).png)
 
-![客户端](E:\Java进阶(note)\SpringBoot笔记\images\客户端.png)
+![客户端](images\客户端.png)
 
 原理:
 
@@ -2603,7 +2605,7 @@ public class MyErrorAttributes extends DefaultErrorAttributes {
 
 SpringBoot默认使用Tomcat作为嵌入式的Servlet容器；
 
-![tomcat](E:\Java进阶(note)\SpringBoot笔记\images\tomcat.jpg)
+![tomcat](images\tomcat.jpg)
 
 ### 1)、如何定制和修改Servlet容器的相关配置；
 
@@ -2702,7 +2704,7 @@ SpringBoot帮我们自动配置SpringMVC的时候,就自动注册了SpringMVC的
 
 ### 3)、替换为其他嵌入式Servlet容器
 
-![servlet容器](E:\Java进阶(note)\SpringBoot笔记\images\servlet容器.jpg)
+![servlet容器](images\servlet容器.jpg)
 
 默认支持：
 
@@ -3063,7 +3065,7 @@ Spring的web模块里面有这个文件：**org.springframework.web.SpringServle
 
 4)、每一个WebApplicationInitializer调用自己的onStartup；
 
-![WebApplicationInit](E:\Java进阶(note)\SpringBoot笔记\images\WebApplicationInit.jpg)
+![WebApplicationInit](images\WebApplicationInit.jpg)
 
 5)、相当于我们的SpringBootServletInitializer的类会被创建对象，并执行onStartup方法
 
@@ -3440,7 +3442,7 @@ public class DruidConfig {
 </dependency>
 ```
 
-![springboot-mybatis](E:\Java进阶(note)\SpringBoot笔记\images\springboot-mybatis.jpg)
+![springboot-mybatis](images\springboot-mybatis.jpg)
 
 步骤：
 
@@ -3507,7 +3509,7 @@ mybatis:
 
 ### 1)、SpringData简介
 
-![SpringData](E:\Java进阶(note)\SpringBoot笔记\images\SpringData.png)
+![SpringData](images\SpringData.png)
 
 ### 2)、SpringData JPA
 

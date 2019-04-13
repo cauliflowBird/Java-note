@@ -16,11 +16,17 @@
 
 # 二、Dubbo架构
 
-![dubbo-architecture](E:\Java进阶(note)\dubbo\images\dubbo-architecture.jpg)
+![dubbo-architecture](images\dubbo-architecture.jpg)
 
-![1554981672727](C:\Users\wangyuchen\AppData\Roaming\Typora\typora-user-images\1554981672727.png)
+![1554981855307](images/description.png)
 
-![1554981855307](C:\Users\wangyuchen\AppData\Roaming\Typora\typora-user-images\1554981855307.png)
+![1554981672727](images/sm.png)
+
+
+
+
+
+
 
 
 
