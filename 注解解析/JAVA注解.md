@@ -2,13 +2,13 @@
 
 ## 一、注解的概念和分类
 
-![概念](images\概念.jpg)
+![概念](images/概念.jpg)
 
 ![注解分类](E:\Java进阶(note)\注解解析\images\注解分类.jpg)
 
 ## 二、自定义注解的语法要求
 
-![自定义语法](images\自定义语法.jpg)
+![自定义语法](images/自定义语法.jpg)
 
 ![语法要求](E:\Java进阶(note)\注解解析\images\语法要求.jpg)
 
@@ -40,7 +40,7 @@
 
 ## 四、使用注解                             
 
-![使用自定义注解](images\使用自定义注解.jpg)
+![使用自定义注解](images/使用自定义注解.jpg)
 
 并传入了自定义注解Description成员的值;
 

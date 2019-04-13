@@ -16,7 +16,7 @@
 
 # 二、Dubbo架构
 
-![dubbo-architecture](images\dubbo-architecture.jpg)
+![dubbo-architecture](images/dubbo-architecture.jpg)
 
 ![1554981855307](images/description.png)
 

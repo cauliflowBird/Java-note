@@ -70,7 +70,7 @@
 >
 > Spring容器负责创建对象,装配它们,配置它们并管理它们的整个生命周期,从生存到死亡(可能就是new 到 finalize())；如图:
 
-![容器](images\容器.jpg)
+![容器](images/容器.jpg)
 
 **容器---Spring核心，自带容器归为两种类型:**
 
@@ -105,7 +105,7 @@ new AnnotationConfigApplicationContext(com.springinaction.knights.config.KnightC
 
 ##### 1.2.2   bean的生命周期
 
-![bean生命周期](images\bean生命周期.jpg)
+![bean生命周期](images/bean生命周期.jpg)
 
 **详细描述:**
 
@@ -131,7 +131,7 @@ new AnnotationConfigApplicationContext(com.springinaction.knights.config.KnightC
 
 ##### 1.2.3  Spring模块
 
-![Spring模块](images\Spring模块.jpg)
+![Spring模块](images/Spring模块.jpg)
 
 - **Spring核心容器**
   - 容器是Spring框架最核心的部分,管理着Spring应用中bean的创建、配置和管理；该模块中，包括了Spring bean工厂，它为Spring提供了DI的功能。基于bean工厂，还会发现有多种Spring应用上下文的实现，每一种都提供了配置Spring的不同方式。该模块也提供了许多企业服务，例如E-mail、JNDI访问、EJB集成和调度。所有的Spring模块都构建于核心容器之上。配置应用时，会隐式地使用这些类。
@@ -855,7 +855,7 @@ StoreService默认是一个单例的bean,在应用上下文加载的时候创建
 
 **Spring不会注入实际的ShoppingCart bean，而是注入一个ShoppingCart bean的代理**，如下图：
 
-![作用域代理](images\作用域代理.jpg)
+![作用域代理](images/作用域代理.jpg)
 
 这个代理会暴露与ShoppingCart相同的方法，所以StoreService会认为它就是一个购物车；但是，当StoreService调用ShoppingCart的方法时，**代理会对其进行懒解析并将调用委托给会话作用域内真正的ShoppingCart bean**。
 
@@ -1063,7 +1063,7 @@ public BlankDisc(
 
 ​		软件开发中，**散布于应用中的多处功能被称为**-**横切关注点**(如日志、安全、事务)(==概念上与应用的业务   逻辑相分离==);
 
-![切面](images\切面.jpg)
+![切面](images/切面.jpg)
 
 **切面**---模块化横切关注点;
 
@@ -1071,7 +1071,7 @@ public BlankDisc(
 
 ##### 	4.1.1 AOP术语
 
-![AOP](images\AOP.jpg)
+![AOP](images/AOP.jpg)
 
 **通知(Advice)-**--定义了切面是什么以及何时使用；
 
@@ -1104,7 +1104,7 @@ Spring切面可以应用5种类型通知：
 
 **Spring通知是JAVA编写,且Spring AOP是运行时通知对象，采用动态代理，只支持方法连接点--即在目标对象的方法执行前后，织入切面执行切面逻辑；**
 
-![Spring切面](images\Spring切面.jpg)
+![Spring切面](images/Spring切面.jpg)
 
 #### 4.2  通过切点来选择连接点
 
@@ -1276,7 +1276,7 @@ public class TrackCounter {
 
 利用被称为引入的AOP概念，切面可以为Spring bean添加新方法；
 
-![被引入的AOP](images\被引入的AOP.jpg)
+![被引入的AOP](images/被引入的AOP.jpg)
 
 ```java
 package com.yuchen.spring.concert;

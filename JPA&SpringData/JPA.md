@@ -4,7 +4,7 @@
 >
 > JavaEE5.0 平台标准的ORM规范，使应用程序以统一的方式访问持久层
 
-![JPA是什么](images\JPA是什么.jpg)
+![JPA是什么](images/JPA是什么.jpg)
 
 - **JPA 是 hibernate 的一个抽象（就像JDBC和JDBC驱动的关系）**：
 
