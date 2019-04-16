@@ -28,7 +28,7 @@
 
 
 
-# 二、Git常用命令和概念
+# 二、Git常用命令和教程
 
 ## 1、Git常用命令
 
@@ -252,7 +252,7 @@ $ ssh-keygen -t rsa -C "youremail@example.com"
 
 点“Add Key”，你就应该看到已经添加的Key：
 
-#### 5.1 远程同步
+#### 5.1 添加远程库进行远程同步
 
 实现本地Git仓库与Github上新建一个Git仓库进行远程同步；这样GitHub上的仓库即可以作为备份也可以用来协作。
 
@@ -289,3 +289,349 @@ $ git push origin master
 注意:当本地master分支与远程Github上master分支关联起来后，若先在Github上master分支手动作了修改，此时要向基于远程(Github分支)同步到本地master后`$ git pull --rebase origin master`
 
 才能推送本地的修改到远程master`$ git push origin master`,否则直接push会报错。
+
+#### 5.2  从远程库克隆
+
+没有本地Git仓库的情况下,先在Github上新建一个Git仓库,然后用命令`git clone`克隆一个本地Git仓库；
+
+![gitclone](images/gitclone.jpg)
+
+从已创建的远程Github仓库获得clone的url(**此时是使用HTTPS协议的url,当然也可以点击Use ssH使用ssh协议的url(最快)**),然后
+
+```shell
+wangyuchen@DESKTOP-47REHO2 MINGW64 /D/Git2.21.0/repository (master)
+$ git clone https://github.com/cauliflowBird/gitskills.git
+Cloning into 'gitskills'...
+remote: Enumerating objects: 3, done.
+remote: Counting objects: 100% (3/3), done.
+remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (3/3), done.
+
+此时本地Git仓库中就多了gitskills目录及其中的README.MD文件(仓库):
+$ ls
+gitskills/  LICENSE.txt  readme.txt
+$ cd gitskills/
+
+$ ls
+README.md
+```
+
+## 6、分支管理
+
+场景：在公司中，多人协作完成一个项目，首先个人每天开发进度(代码)需要提交，但不完整的提交(代码不全或者库不完整)可能导致其他人无法正常工作，此时又想要记录每天自己的进度:
+
+此时就需要分支来解决，个人创建专属个人的一个分支，别人看不到，在自己的分支上更新修改直到代码开发完毕，不影响其他人，开发完后再合并到原来的分支上就不会对他人造成影响。
+
+#### 6.1  创建与合并分支
+
+![master](images/master.jpg)
+
+每次提交,Git把他们串成一条时间线,这条时间线就是一个分支;目前就一条时间线,在Git里该分支就叫主分支即`master`分支;`HEAD`实际是指向`master`,`master`指向提交,即`HEAD`指向的就是当前分支；
+
+`master`分支是一条线,Git用`master`指向最新的提交(即版本),再用`HEAD`指向`master`就能确定当前分支及当前分支最新的提交点;
+
+每次提交`master`分支就会向前移动一步,不断提交`master`分支的线也会越来越长;
+
+![dev](images/dev.jpg)
+
+创建一个新的分支`dev`,Git新建一个叫`dev`的指针，指向`master`相同的提交,再将`HEAD`指向`dev`,就表示当前分支在`dev`上；(新建分支很快,增加`dev`指针，改变`HEAD`指向即可)
+
+现在开始，对工作区的修改和提交就是针对`dev`分支了，比如新提交一次后，`dev`指针往前移动一步，而`master`指针不变：
+
+![dev1](images/dev1.jpg)
+
+假如我们在`dev`上的工作完成了，就可以把`dev`合并到`master`上;Git合并--直接把`master`指向`dev`的当前提交，就完成了合并。
+
+![hebin](images/hebing.jpg)
+
+合并完分支后，甚至可以删除`dev`分支。删除`dev`分支就是把`dev`指针给删掉，删掉后，我们就剩下了一条`master`分支
+
+![hebinhou](images/hebinhou.jpg)
+
+1.创建`dev`分支，然后切换到`dev`分支
+
+```shell
+$ git checkout -b dev   --创建dev分支并切换
+Switched to a new branch 'dev'
+等同于:
+$ git branch dev --创建dev分支
+$ git checkout dev --切换到dev分支
+Switched to branch 'dev'
+
+$ git branch  --查看所有分支，当前所在分支(*前缀)
+* dev
+  master
+手动修改README.md文件添加一行 Creating a new branch is quick.然后提交:
+$ git add README.md
+$ git commit -m "branch test"
+[dev 193147f] branch test
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+dev分支的工作完成，我们就可以切换回master分支：
+$ git checkout master
+Switched to branch 'master'
+```
+
+切换回`master`分支后，再查看README.md文件，刚才添加的内容不见了！因为那个提交是在`dev`分支上，而`master`分支此刻的提交点并没有变：
+
+![qiehuan](images/qiehuan.jpg)
+
+把`dev`分支的工作成果合并到`master`分支上
+
+```shell
+$ git merge dev  --合并dev分支到master分支上
+Updating f071743..193147f
+Fast-forward
+ README.md | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+```
+
+`git merge`命令用于合并指定分支到当前分支。合并后，再查看README.md的内容，就可以看到，和`dev`分支的最新提交是完全一样的。
+
+合并完成后，就可以放心地删除`dev`分支了：
+
+```shell
+$ git branch -d dev ---删除指定分支
+Deleted branch dev (was 193147f).
+```
+
+删除后，查看`branch`，就只剩下`master`分支了：
+
+```shell
+$ git branch
+* master
+```
+
+#### 6.2  分支合并冲突
+
+当创建新的分支`feature1`,并选择到`feature1`分支对`readme.txt`修改后-->`git add`-->`git commit -m `"",
+
+之后再切换回原`master`分支,同样对`readme.txt`修改后-->`git add`-->`git commit -m `"";
+
+现在，`master`分支和`feature1`分支各自都分别有新的提交，变成了这样：
+
+![conflict](images/conflict.jpg)
+
+然后将`feature1`分支合并到`master`分支会出现冲突:
+
+```shell
+wangyuchen@DESKTOP-47REHO2 MINGW64 /D/Git2.21.0/repository (master)
+$ git merge feature1  	`合并`
+Auto-merging readme.txt
+CONFLICT (content): Merge conflict in readme.txt
+Automatic merge failed; fix conflicts and then commit the result.
+
+wangyuchen@DESKTOP-47REHO2 MINGW64 /D/Git2.21.0/repository (master|MERGING)
+$ git status
+On branch master
+Your branch is ahead of 'origin/master' by 1 commit.
+  (use "git push" to publish your local commits)
+
+You have unmerged paths.
+  (fix conflicts and run "git commit")
+  (use "git merge --abort" to abort the merge)
+
+Unmerged paths:
+  (use "git add <file>..." to mark resolution)
+
+        both modified:   readme.txt
+```
+
+查看`readme.txt`
+
+```txt
+Git is a distributed version control system.
+Git is free software distributed under the GPL.
+Git has a mutable index called stage.
+Git tracks changes of files.
+<<<<<<< HEAD
+Creating a new branch is quick & simple.
+=======
+Creating a new branch is quick AND simple.
+>>>>>>> feature1
+```
+
+Git用`<<<<<<<`，`=======`，`>>>>>>>`标记出不同分支的内容，我们手动修改如下后保存
+
+```txt
+Creating a new branch is quick and simple.
+```
+
+再`git add readme.txt`-->`git commit -m "conflict fixed"`,现在，`master`分支和`feature1`分支变成了如下:
+
+ ![fixed](images/conflictFixed.jpg)
+
+用带参数的`git log`也可以看到分支的合并情况：
+
+```shell
+$ git log --graph --pretty=oneline --abbrev-commit
+*   9515212 (HEAD -> master) conflict fixed
+|\
+| * 463a5ba (feature1) AND simple
+* | c9d2941 & simple
+|/
+* 9b8c3f8 (origin/master) remove test.txt
+* cfbc77b add test.txt
+* d217e78 insteadmodify
+* ba8f3ab git tracks changes
+* d621b6c understand how stage works
+* 00983f8 append GPL
+* b9866a0 add distributed
+* a5fad2c wrote a readme file
+
+最后删除分支`feature1`
+$ git branch -d feature1
+Deleted branch feature1 (was 463a5ba).
+```
+
+当Git无法自动合并分支时，就必须首先解决冲突。解决冲突后，再提交，合并完成。
+
+解决冲突就是把Git合并失败的文件手动编辑为我们希望的内容，再提交。
+
+用`git log --graph`命令可以看到分支合并图
+
+#### 6.3  分支管理
+
+通常，合并分支时，如果可能，Git会用`Fast forward`模式，但这种模式下，删除分支后，会丢掉分支信息。
+
+如果要强制禁用`Fast forward`模式，Git就会在merge时生成一个新的commit，这样，从分支历史上就可以看出分支信息
+
+```shell
+$ git checkout -b dev `创建一个dev分支并切换到dev分支`
+`修改readme.txt后 git add --> git commit -m '''
+`再切换到master分支`
+$ git checkout master
+Switched to branch 'master'
+Your branch is ahead of 'origin/master' by 3 commits.
+  (use "git push" to publish your local commits)
+使用
+$ git merge --no-ff -m "merge with no-ff" dev `强制禁用fast forward模式`
+Merge made by the 'recursive' strategy.
+ readme.txt | 6 ++----
+ 1 file changed, 2 insertions(+), 4 deletions(-)
+合并,此时强制禁用了fast forward模式
+`查看分支历史`
+git log --graph --pretty=oneline --abbrev-commit
+*   3c74617 (HEAD -> master) merge with no-ff
+|\
+| * b416ba0 (dev) add merge
+|/
+```
+
+不使用`Fast forward`模式，merge后就像这样：
+
+![](images/mergeWoFf.jpg)
+
+#### 6.4  Bug分支
+
+当手头上正在dev分支上编写一个文件进行到一半,但被通知要立马去处理master分支bug（新建个bug分支处理)
+
+```shell
+$ git status
+On branch dev
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+        modified:   readme.txt
+此时使用`git stash`储藏工作现场:
+$ git stash
+Saved working directory and index state WIP on dev: b416ba0 add merge
+`去处理master分支上的bug`(git checkout master-->git checkout -b bug01->修改代码文件->git add->git commit -m ''->回到master分支git checkout master->git merge bug01(合并bug分支到master)->删除bug01分支(git branch -d bug01))bug处理完毕,现在回到dev分支:
+
+$ git stash list `查看之前存储的现场信息`
+stash@{0}: WIP on dev: b416ba0 add merge
+恢复现场,方法
+一是用`git stash apply`恢复，但是恢复后，`stash`内容并不删除，你需要用`git stash drop`来删除；
+另一种方式是用`git stash pop`，恢复的同时把stash内容也删了：
+$ git stash pop  `恢复现场`
+On branch dev
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+        modified:   readme.txt
+再用`git stash list`就看不到任何stash内容了;
+```
+
+你可以多次stash，恢复的时候，先用`git stash list`查看，然后恢复指定的stash，用命令：
+
+```shell
+$ git stash apply stash@{0}
+```
+
+#### 6.5 Feature分支
+
+开发一个新feature，最好新建一个分支；
+
+如果要丢弃一个没有被合并过的分支，可以通过`git branch -D <name>`强行删除。
+
+```shell
+$ git checkout -b feature `新建分支并选择`
+`对readme.txt作修改后提交`
+$ git add readme.txt
+$ git commit -m "add feature"
+[feature b490f6f] add feature
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+此时返回master分支要进行合并:
+$ git checkout master
+被通知要撤销该功能，并销毁机密资料
+$ git branch -d feature
+error: The branch 'feature' is not fully merged.
+If you are sure you want to delete it, run 'git branch -D feature'. `强行删除`
+
+$ git branch -D feature
+Deleted branch feature (was b490f6f). --删除成功
+```
+
+#### 6.6  远程协作
+
+远程仓库克隆时，实际上Git自动把本地的`master`分支和远程的`master`分支对应起来了，并且，远程仓库的默认名称是`origin`。
+
+要查看远程库的信息，用`git remote`：
+
+```shell
+$ git remote
+origin
+```
+
+用`git remote -v`显示更详细的信息：
+
+```shell
+$ git remote -v
+origin  https://github.com/cauliflowBird/repository.git (fetch) `抓取地址`
+origin  https://github.com/cauliflowBird/repository.git (push) `推送地址`
+```
+
+##### 推送分支
+
+推送分支，就是把该分支上的所有本地提交推送到远程库。推送时，要指定本地分支，这样，Git就会把该分支推送到远程库对应的远程分支上：
+
+```shell
+$ git push origin master
+```
+
+如果要推送其他分支，比如`dev`，就改成：
+
+```shell
+$ git push origin dev
+```
+
+多人协作的工作模式通常是这样：
+
+1. 首先，可以试图用`git push origin <branch-name>`推送自己的修改；
+2. 如果推送失败，则因为远程分支比你的本地更新，需要先用`git pull`试图合并；
+3. 如果合并有冲突，则解决冲突，并在本地提交；
+4. 没有冲突或者解决掉冲突后，再用`git push origin <branch-name>`推送就能成功！
+
+如果`git pull`提示`no tracking information`，则说明本地分支和远程分支的链接关系没有创建，用命令`git branch --set-upstream-to <branch-name> origin/<branch-name>`。
+
+这就是多人协作的工作模式，一旦熟悉了，就非常简单。
+
+总结:
+
+- 查看远程库信息，使用`git remote -v`；
+- 本地新建的分支如果不推送到远程，对其他人就是不可见的；
+- 从本地推送分支，使用`git push origin branch-name`，如果推送失败，先用`git pull`抓取远程的新提交；
+- 在本地创建和远程分支对应的分支，使用`git checkout -b branch-name origin/branch-name`，本地和远程分支的名称最好一致；
+- 建立本地分支和远程分支的关联，使用`git branch --set-upstream branch-name origin/branch-name`；
+- 从远程抓取分支，使用`git pull`，如果有冲突，要先处理冲突。
